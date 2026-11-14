@@ -15,25 +15,16 @@ import {
 import { cn } from '@/lib/cn'
 import { breadcrumbJsonLd, buildGraph } from '@/utils/seo'
 
-const DAY_FILTERS = [3, 4, 5, 6, 7, 8, 9, 10] as const
-
 export function PackagesPage() {
   const [category, setCategory] = useState<PackageCategory | 'all'>('all')
-  const [days, setDays] = useState<number | 'all'>('all')
 
   const filtered = useMemo(() => {
-    let list =
-      category === 'all'
-        ? packages
-        : category === 'group' || category === 'custom'
-          ? packages.filter((p) => p.category === category)
-          : packagesByCategory(category)
-
-    if (days !== 'all') {
-      list = list.filter((pkg) => pkg.durations.some((d) => d.days === days))
+    if (category === 'all') return packages
+    if (category === 'group' || category === 'custom') {
+      return packages.filter((p) => p.category === category)
     }
-    return list
-  }, [category, days])
+    return packagesByCategory(category)
+  }, [category])
 
   const crumbs = [
     { name: 'Home', path: '/' },
@@ -55,71 +46,42 @@ export function PackagesPage() {
           <SectionHeading
             eyebrow="Programmes"
             title="Tour packages"
-            subtitle="Filter by region and trip length (3-10 days). Use each card dropdown to compare durations and indicative prices."
+            subtitle="Filter by region. Use each card dropdown to compare durations and indicative prices."
           />
         </Reveal>
 
-        <div className="mt-8 space-y-4">
-          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Package categories">
+        <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Package categories">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={category === 'all'}
+            onClick={() => setCategory('all')}
+            className={cn(
+              'rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
+              category === 'all'
+                ? 'bg-[#1B3A2F] text-[#fff] dark:bg-sunset'
+                : 'bg-surface text-muted ring-1 ring-navy/10 hover:text-navy',
+            )}
+          >
+            All packages
+          </button>
+          {packageCategories.map((cat) => (
             <button
+              key={cat.slug}
               type="button"
               role="tab"
-              aria-selected={category === 'all'}
-              onClick={() => setCategory('all')}
+              aria-selected={category === cat.slug}
+              onClick={() => setCategory(cat.slug)}
               className={cn(
                 'rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
-                category === 'all'
+                category === cat.slug
                   ? 'bg-[#1B3A2F] text-[#fff] dark:bg-sunset'
                   : 'bg-surface text-muted ring-1 ring-navy/10 hover:text-navy',
               )}
             >
-              All packages
+              {cat.label}
             </button>
-            {packageCategories.map((cat) => (
-              <button
-                key={cat.slug}
-                type="button"
-                role="tab"
-                aria-selected={category === cat.slug}
-                onClick={() => setCategory(cat.slug)}
-                className={cn(
-                  'rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
-                  category === cat.slug
-                    ? 'bg-[#1B3A2F] text-[#fff] dark:bg-sunset'
-                    : 'bg-surface text-muted ring-1 ring-navy/10 hover:text-navy',
-                )}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2" aria-label="Duration filter">
-            <span className="text-sm font-medium text-navy">Duration:</span>
-            <button
-              type="button"
-              onClick={() => setDays('all')}
-              className={cn(
-                'rounded-full px-3 py-1 text-sm font-medium',
-                days === 'all' ? 'bg-sunset text-white' : 'bg-sand text-muted ring-1 ring-navy/10',
-              )}
-            >
-              All days
-            </button>
-            {DAY_FILTERS.map((day) => (
-              <button
-                key={day}
-                type="button"
-                onClick={() => setDays(day)}
-                className={cn(
-                  'rounded-full px-3 py-1 text-sm font-medium',
-                  days === day ? 'bg-sunset text-white' : 'bg-sand text-muted ring-1 ring-navy/10',
-                )}
-              >
-                {day}D
-              </button>
-            ))}
-          </div>
+          ))}
         </div>
 
         {filtered.length > 0 ? (
