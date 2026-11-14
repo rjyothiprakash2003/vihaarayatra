@@ -118,7 +118,7 @@ export function Lightbox({ images, index, onClose, onNavigate }: LightboxProps) 
             className="max-h-[min(70vh,720px)] w-full object-contain"
             decoding="async"
           />
-          <figcaption className="border-t border-white/10 bg-navy/80 px-4 py-3 text-sm text-ivory sm:px-6">
+          <figcaption className="border-t border-white/10 bg-navy-deep/90 px-4 py-3 text-sm text-[#FBF7F0] sm:px-6">
             <p>{image.caption}</p>
             <p className="mt-1 text-xs text-ivory/70">
               Photo:{' '}

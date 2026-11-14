@@ -90,7 +90,7 @@ export function AboutPage() {
             {siteInfo.coreValues.map((value) => (
               <li
                 key={value.title}
-                className="rounded-2xl border border-navy/10 bg-white p-6 shadow-sm"
+                className="rounded-2xl border border-navy/10 bg-surface p-6 shadow-sm"
               >
                 <h3 className="font-display text-lg font-semibold text-navy">{value.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{value.description}</p>
@@ -120,7 +120,7 @@ export function AboutPage() {
               {destinations.map((d) => (
                 <li
                   key={d.slug}
-                  className="rounded-full bg-white px-3 py-1 text-sm font-medium text-navy ring-1 ring-navy/10"
+                  className="rounded-full bg-surface px-3 py-1 text-sm font-medium text-navy ring-1 ring-navy/10"
                 >
                   {d.name}
                 </li>

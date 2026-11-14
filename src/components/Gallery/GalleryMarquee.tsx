@@ -30,7 +30,7 @@ export function GalleryMarquee() {
               loading={index < 6 ? 'eager' : 'lazy'}
               decoding="async"
             />
-            <figcaption className="truncate bg-white px-3 py-2 text-xs text-muted">
+            <figcaption className="truncate bg-surface px-3 py-2 text-xs text-muted">
               {img.caption}
             </figcaption>
           </figure>

@@ -64,7 +64,7 @@ export function GroupToursPage() {
             const dest = destinationBySlug[item.slug];
             return (
               <Reveal key={item.slug} as="article">
-                <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-sm">
+                <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-surface shadow-sm">
                   <img
                     src={dest.cardImage}
                     alt={dest.name}

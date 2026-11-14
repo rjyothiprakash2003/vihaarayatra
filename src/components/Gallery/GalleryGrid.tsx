@@ -41,8 +41,8 @@ export function GalleryGrid({ images = galleryImages, className }: GalleryGridPr
               className={cn(
                 'rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
                 filter === cat
-                  ? 'bg-navy text-white shadow-sm'
-                  : 'bg-white text-muted ring-1 ring-navy/10 hover:text-navy',
+                  ? 'bg-[#1B3A2F] text-[#fff] shadow-sm dark:bg-sunset'
+                  : 'bg-surface text-muted ring-1 ring-navy/10 hover:text-navy',
               )}
             >
               {GALLERY_CATEGORY_LABELS[cat]}
@@ -71,7 +71,7 @@ export function GalleryGrid({ images = galleryImages, className }: GalleryGridPr
                 decoding="async"
                 className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none"
               />
-              <span className="block bg-white px-3 py-2 text-xs text-muted">{img.caption}</span>
+              <span className="block bg-surface px-3 py-2 text-xs text-muted">{img.caption}</span>
             </button>
           </li>
         ))}

@@ -1,18 +1,44 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  /* Warm forest + sunset theme (not blue-only). `navy` token kept for class compatibility. */
-  --color-navy: #1B3A2F;
-  --color-navy-deep: #0F241C;
+  --color-navy: var(--vy-navy);
+  --color-navy-deep: var(--vy-navy-deep);
   --color-sunset: #FF8A00;
   --color-teal: #0D9488;
   --color-coral: #E85D4C;
-  --color-sand: #F3E8D8;
-  --color-ivory: #FBF7F0;
-  --color-body: #2A2118;
-  --color-muted: #6B5E52;
+  --color-sand: var(--vy-sand);
+  --color-ivory: var(--vy-ivory);
+  --color-body: var(--vy-body);
+  --color-muted: var(--vy-muted);
+  --color-surface: var(--vy-surface);
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-body: Inter, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+  --vy-navy: #1B3A2F;
+  --vy-navy-deep: #0F241C;
+  --vy-sand: #F3E8D8;
+  --vy-ivory: #FBF7F0;
+  --vy-body: #2A2118;
+  --vy-muted: #6B5E52;
+  --vy-surface: #FFFFFF;
+  --vy-theme-meta: #1B3A2F;
+}
+
+html.dark {
+  color-scheme: dark;
+  --vy-navy: #E7F3EC;
+  --vy-navy-deep: #070D0A;
+  --vy-sand: #18231E;
+  --vy-ivory: #0F1612;
+  --vy-body: #EDE6DC;
+  --vy-muted: #A99C8F;
+  --vy-surface: #1A2420;
+  --vy-theme-meta: #0F1612;
 }
 
 @layer base {
@@ -35,7 +61,7 @@
   }
 
   body {
-    @apply bg-ivory text-body font-body antialiased;
+    @apply bg-ivory text-body font-body antialiased transition-colors duration-300;
   }
 
   :focus-visible {
@@ -47,6 +73,24 @@
   h3,
   h4 {
     @apply font-display text-navy tracking-tight;
+  }
+
+  p,
+  dd,
+  address,
+  figcaption,
+  article li,
+  .prose-narrow p {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+
+  p.text-center,
+  .text-center p,
+  footer p,
+  [class*="text-center"] p {
+    text-align: center;
   }
 }
 

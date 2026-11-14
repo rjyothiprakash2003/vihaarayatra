@@ -69,8 +69,8 @@ export function PackagesPage() {
               className={cn(
                 'rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
                 category === 'all'
-                  ? 'bg-navy text-white'
-                  : 'bg-white text-muted ring-1 ring-navy/10 hover:text-navy',
+                  ? 'bg-[#1B3A2F] text-[#fff] dark:bg-sunset'
+                  : 'bg-surface text-muted ring-1 ring-navy/10 hover:text-navy',
               )}
             >
               All packages
@@ -85,8 +85,8 @@ export function PackagesPage() {
                 className={cn(
                   'rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
                   category === cat.slug
-                    ? 'bg-navy text-white'
-                    : 'bg-white text-muted ring-1 ring-navy/10 hover:text-navy',
+                    ? 'bg-[#1B3A2F] text-[#fff] dark:bg-sunset'
+                    : 'bg-surface text-muted ring-1 ring-navy/10 hover:text-navy',
                 )}
               >
                 {cat.label}

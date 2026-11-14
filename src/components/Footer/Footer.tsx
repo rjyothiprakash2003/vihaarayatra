@@ -11,7 +11,7 @@ export function Footer() {
   const waHref = buildWhatsAppUrl();
 
   return (
-    <footer className="border-t border-navy/10 bg-navy text-ivory">
+    <footer className="border-t border-white/10 bg-navy-deep text-[#FBF7F0]">
       <Container className="py-12 lg:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
@@ -24,7 +24,7 @@ export function Footer() {
                 height={44}
               />
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ivory/85">{siteInfo.aboutSummary}</p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#FBF7F0]/85">{siteInfo.aboutSummary}</p>
           </div>
 
           <div className="lg:col-span-2">
@@ -36,7 +36,7 @@ export function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-ivory/85 transition hover:text-white hover:underline underline-offset-2"
+                    className="text-[#FBF7F0]/85 transition hover:text-white hover:underline underline-offset-2"
                   >
                     {link.label}
                   </Link>
@@ -45,7 +45,7 @@ export function Footer() {
               <li>
                 <Link
                   to="/contact"
-                  className="text-ivory/85 transition hover:text-white hover:underline underline-offset-2"
+                  className="text-[#FBF7F0]/85 transition hover:text-white hover:underline underline-offset-2"
                 >
                   Contact
                 </Link>
@@ -62,7 +62,7 @@ export function Footer() {
                 <li key={dest.slug} className="mb-2 break-inside-avoid">
                   <Link
                     to={`/destinations/${dest.slug}`}
-                    className="text-ivory/85 transition hover:text-white hover:underline underline-offset-2"
+                    className="text-[#FBF7F0]/85 transition hover:text-white hover:underline underline-offset-2"
                   >
                     {dest.name}
                   </Link>
@@ -75,7 +75,7 @@ export function Footer() {
             <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-teal">
               Contact
             </h2>
-            <ul className="mt-4 space-y-3 text-sm text-ivory/85">
+            <ul className="mt-4 space-y-3 text-sm text-[#FBF7F0]/85">
               <li className="flex gap-2">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-teal" aria-hidden />
                 <address className="not-italic">{siteInfo.address.full}</address>
@@ -84,7 +84,7 @@ export function Footer() {
                 <li key={phone.number} className="flex gap-2">
                   <Phone className="mt-0.5 size-4 shrink-0 text-teal" aria-hidden />
                   <span>
-                    <span className="text-ivory/70">{phone.label}: </span>
+                    <span className="text-[#FBF7F0]/70">{phone.label}: </span>
                     <a href={`tel:${phone.number}`} className="hover:text-white hover:underline">
                       {phone.display}
                     </a>
@@ -114,15 +114,18 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-ivory/70 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-[#FBF7F0]/70 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {siteInfo.established}-{year} {siteInfo.name}. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/privacy" className="hover:text-white hover:underline underline-offset-2">
+            <Link to="/privacy-policy" className="hover:text-white hover:underline underline-offset-2">
               Privacy
             </Link>
-            <Link to="/terms" className="hover:text-white hover:underline underline-offset-2">
+            <Link
+              to="/terms-and-conditions"
+              className="hover:text-white hover:underline underline-offset-2"
+            >
               Terms
             </Link>
           </div>

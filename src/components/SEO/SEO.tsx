@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { siteInfo } from '@/data/site';
+import { useTheme } from '@/context/ThemeContext';
 import { absoluteUrl, SITE_URL } from '@/utils/seo';
 
 const DEFAULT_OG = '/logos/logo-horizontal.svg';
@@ -23,10 +24,12 @@ export function SEO({
   jsonLd,
   noindex = false,
 }: SEOProps) {
+  const { theme } = useTheme();
   const canonical = absoluteUrl(path);
   const fullTitle = title.includes(siteInfo.name) ? title : `${title} | ${siteInfo.name}`;
   const ogImage = absoluteUrl(image ?? DEFAULT_OG);
   const robots = noindex ? 'noindex, nofollow' : 'index, follow';
+  const themeColor = theme === 'dark' ? '#0F1612' : '#1B3A2F';
 
   const ldPayload = jsonLd
     ? Array.isArray(jsonLd)
@@ -40,7 +43,8 @@ export function SEO({
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
       <meta name="robots" content={robots} />
-      <meta name="theme-color" content="#1B3A2F" />
+      <meta name="theme-color" content={themeColor} />
+      <meta name="color-scheme" content="light dark" />
 
       <meta property="og:site_name" content={siteInfo.name} />
       <meta property="og:title" content={fullTitle} />

@@ -95,7 +95,7 @@ export function TravelGuidesPage() {
             <Reveal key={guide.slug} delay={index * 0.05} as="article">
               <Link
                 to={`/travel-guides/${guide.slug}`}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-sm transition hover:shadow-md"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-surface shadow-sm transition hover:shadow-md"
               >
                 <img
                   src={guide.coverImage}

@@ -7,9 +7,9 @@ type ButtonSize = 'sm' | 'md' | 'lg';
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-sunset text-white shadow-md shadow-sunset/25 hover:bg-sunset/90 focus-visible:ring-sunset',
+    'bg-sunset text-[#fff] shadow-md shadow-sunset/25 hover:bg-sunset/90 focus-visible:ring-sunset',
   secondary:
-    'border-2 border-navy bg-transparent text-navy hover:bg-navy hover:text-white focus-visible:ring-navy',
+    'border-2 border-navy bg-transparent text-navy hover:bg-navy hover:text-ivory focus-visible:ring-navy dark:hover:text-navy-deep',
   ghost: 'bg-transparent text-navy hover:bg-navy/5 focus-visible:ring-navy',
 };
 

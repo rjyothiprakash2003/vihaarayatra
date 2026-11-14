@@ -97,7 +97,7 @@ export function HomePage() {
                 variant="secondary"
                 size="lg"
                 to="/contact"
-                className="border-white text-white hover:bg-white hover:text-navy"
+                className="border-white text-white hover:bg-white hover:text-navy-deep"
               >
                 Plan Your Journey
               </Button>
@@ -202,7 +202,7 @@ export function HomePage() {
           <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {siteInfo.coreValues.map((value, index) => (
               <Reveal key={value.title} delay={index * 0.05} as="article">
-                <div className="h-full rounded-2xl border border-navy/10 bg-white p-6 shadow-sm">
+                <div className="h-full rounded-2xl border border-navy/10 bg-surface p-6 shadow-sm">
                   <h3 className="font-display text-lg font-semibold text-navy">{value.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{value.description}</p>
                 </div>
@@ -212,7 +212,7 @@ export function HomePage() {
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-navy py-16 text-white sm:py-24">
+      <section className="relative overflow-hidden bg-navy-deep py-16 text-white sm:py-24">
         <img
           src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1920&q=80"
           alt="Travellers enjoying a scenic international journey"

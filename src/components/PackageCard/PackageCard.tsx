@@ -39,7 +39,7 @@ export function PackageCard({ pkg, className, index = 0 }: PackageCardProps) {
 
   return (
     <motion.article {...motionProps} className={cn('group flex h-full flex-col', className)}>
-      <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-sm transition-shadow hover:shadow-lg">
+      <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-surface shadow-sm transition-shadow hover:shadow-lg">
         <Link
           to={`/packages/${pkg.slug}`}
           className="relative block aspect-[16/10] overflow-hidden bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sunset"

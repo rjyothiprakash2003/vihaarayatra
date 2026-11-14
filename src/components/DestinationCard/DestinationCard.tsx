@@ -26,7 +26,7 @@ export function DestinationCard({ destination, className, index = 0 }: Destinati
     <motion.article {...motionProps} className={cn('group', className)}>
       <Link
         to={`/destinations/${destination.slug}`}
-        className="flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunset"
+        className="flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-surface shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunset"
       >
         <div className="relative aspect-[4/3] overflow-hidden bg-navy/5">
           <img

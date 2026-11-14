@@ -120,7 +120,7 @@ export function DestinationDetailPage() {
               return (
                 <li
                   key={attr.name}
-                  className="overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-sm"
+                  className="overflow-hidden rounded-2xl border border-navy/10 bg-surface shadow-sm"
                 >
                   <img
                     src={image.thumb ?? image.src}
