@@ -1,0 +1,21 @@
+{
+  "name": "VihaaraYatra International Tours",
+  "short_name": "VihaaraYatra",
+  "description": "Premium international holiday packages to Singapore, Malaysia, Thailand and beyond.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F5EF",
+  "theme_color": "#1B3A2F",
+  "icons": [
+    {
+      "src": "/favicon/android-chrome-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon/android-chrome-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

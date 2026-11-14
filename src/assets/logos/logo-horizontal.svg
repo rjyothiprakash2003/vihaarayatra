@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" role="img" aria-labelledby="title desc">
+  <title id="title">VihaaraYatra International Tours</title>
+  <desc id="desc">Logo with palm trees, sunset, airplane and ocean waves</desc>
+  <defs>
+    <linearGradient id="sunset" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFB347"/>
+      <stop offset="55%" stop-color="#FF8A00"/>
+      <stop offset="100%" stop-color="#E06A00"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon circle -->
+  <circle cx="58" cy="60" r="48" fill="#061C40"/>
+  <circle cx="58" cy="52" r="18" fill="url(#sunset)"/>
+  <!-- Palm left -->
+  <path d="M34 88 C34 70 28 58 22 48 C30 54 36 66 38 80 Z" fill="#06AFC0"/>
+  <path d="M38 88 C42 68 48 54 58 42 C52 56 46 70 42 88 Z" fill="#0A8A98"/>
+  <!-- Palm right -->
+  <path d="M78 88 C78 70 84 58 90 48 C82 54 76 66 74 80 Z" fill="#06AFC0"/>
+  <path d="M74 88 C70 68 64 54 54 42 C60 56 66 70 70 88 Z" fill="#0A8A98"/>
+  <!-- Trunks -->
+  <path d="M38 80 L42 96" stroke="#F7F5EF" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M70 80 L66 96" stroke="#F7F5EF" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Waves -->
+  <path d="M18 96 Q30 90 42 96 T66 96 T90 96 T98 96" fill="none" stroke="#06AFC0" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M22 102 Q34 97 46 102 T70 102 T94 102" fill="none" stroke="#FF8A00" stroke-width="2" stroke-linecap="round"/>
+  <!-- Airplane -->
+  <g transform="translate(72,28) rotate(18)">
+    <path d="M0 6 L22 0 L26 3 L8 10 Z" fill="#FFFFFF"/>
+    <path d="M10 4 L14 -4 L17 -3 L14 6 Z" fill="#FFFFFF"/>
+    <path d="M8 8 L4 14 L7 14 L12 9 Z" fill="#FFFFFF"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="128" y="58" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="34" font-weight="700" fill="#082D64">VihaaraYatra</text>
+  <text x="130" y="84" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="500" letter-spacing="2.2" fill="#06AFC0">INTERNATIONAL TOURS</text>
+</svg>

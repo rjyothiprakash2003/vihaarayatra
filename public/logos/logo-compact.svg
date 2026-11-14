@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="VihaaraYatra">
+  <defs>
+    <linearGradient id="sunset" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFB347"/>
+      <stop offset="55%" stop-color="#FF8A00"/>
+      <stop offset="100%" stop-color="#E06A00"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="56" fill="#061C40"/>
+  <circle cx="60" cy="50" r="20" fill="url(#sunset)"/>
+  <path d="M34 90 C34 70 27 56 20 44 C30 52 37 66 39 84 Z" fill="#06AFC0"/>
+  <path d="M39 90 C44 68 51 52 62 38 C55 54 48 70 44 90 Z" fill="#0A8A98"/>
+  <path d="M86 90 C86 70 93 56 100 44 C90 52 83 66 81 84 Z" fill="#06AFC0"/>
+  <path d="M81 90 C76 68 69 52 58 38 C65 54 72 70 76 90 Z" fill="#0A8A98"/>
+  <path d="M39 82 L44 100" stroke="#F7F5EF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M76 82 L71 100" stroke="#F7F5EF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M18 98 Q32 90 46 98 T74 98 T102 98" fill="none" stroke="#06AFC0" stroke-width="3" stroke-linecap="round"/>
+  <path d="M22 106 Q36 99 50 106 T78 106 T98 106" fill="none" stroke="#FF8A00" stroke-width="2.5" stroke-linecap="round"/>
+  <g transform="translate(78,24) rotate(18)">
+    <path d="M0 7 L26 0 L31 4 L10 12 Z" fill="#FFFFFF"/>
+    <path d="M12 5 L17 -5 L21 -3 L17 7 Z" fill="#FFFFFF"/>
+    <path d="M10 10 L5 17 L9 17 L15 11 Z" fill="#FFFFFF"/>
+  </g>
+</svg>
