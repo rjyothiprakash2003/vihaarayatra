@@ -1,6 +1,7 @@
-# Testing & Optimization Report — VihaaraYatra
+# Testing & Optimization Report - Vihaara Yatra
 
-Date: 2026-11-14
+**Release:** 1.1  
+**Date:** 2026-11-14
 
 ## Build
 
