@@ -74,20 +74,20 @@ export function PackageDetailPage() {
               >
                 {pkg.durations.map((option) => (
                   <option key={option.days} value={option.days}>
-                    {option.label}
-                    {option.amount != null ? ` - from ${option.priceDisplay}` : ' - On request'}
+                    {option.label} - from {option.priceDisplay}
                   </option>
                 ))}
               </select>
             </label>
 
             <p className="mt-5">
-              <span className="text-xs font-medium uppercase text-muted">
-                {selected.amount != null ? 'From ' : 'Price '}
-              </span>
+              <span className="text-xs font-medium uppercase text-muted">From </span>
               <span className="font-display text-3xl font-semibold text-coral">
                 {selected.priceDisplay}
               </span>
+            </p>
+            <p className="mt-3 inline-flex w-fit rounded-full bg-sunset/15 px-3 py-1 text-xs font-semibold text-navy ring-1 ring-sunset/30">
+              Prices are estimated
             </p>
             <p className="mt-4 text-body leading-relaxed text-muted">{pkg.shortDescription}</p>
 

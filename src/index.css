@@ -88,9 +88,13 @@ html.dark {
 
   p.text-center,
   .text-center p,
-  footer p,
   [class*="text-center"] p {
     text-align: center;
+  }
+
+  footer p {
+    text-align: justify;
+    text-justify: inter-word;
   }
 }
 

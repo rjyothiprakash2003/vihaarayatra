@@ -13,7 +13,7 @@ export interface DurationOption {
   nights: number
   label: string
   priceDisplay: string
-  amount: number | null
+  amount: number
   legacyAdvertised: boolean
   note?: string
 }
@@ -35,37 +35,90 @@ const unsplash = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=80`
 
 const reconfirmationNote =
-  'Indicative pricing from previously advertised programmes or enquiry ranges. Final cost, availability, inclusions, and dates must be reconfirmed with VihaaraYatra International Tours before booking.'
+  'Prices shown are estimated starting figures for planning. Final cost, availability, inclusions, and dates must be reconfirmed with VihaaraYatra International Tours before booking.'
 
-function durationRange(
-  base: { days: number; amount: number; display: string }[],
-  enquireDays: number[],
-): DurationOption[] {
-  const byDay = new Map(base.map((b) => [b.days, b]))
+function formatInr(amount: number, suffix = ''): string {
+  return `₹${amount.toLocaleString('en-IN')}${suffix}`
+}
+
+function roundThousand(value: number): number {
+  return Math.max(1000, Math.round(value / 1000) * 1000)
+}
+
+type PriceAnchor = {
+  days: number
+  amount: number
+  display?: string
+  suffix?: string
+}
+
+function estimateAmount(days: number, anchors: PriceAnchor[]): { amount: number; legacy: boolean; display: string } {
+  const sorted = [...anchors].sort((a, b) => a.days - b.days)
+  const exact = sorted.find((a) => a.days === days)
+  const suffix = sorted.find((a) => a.suffix)?.suffix ?? ''
+
+  if (exact) {
+    return {
+      amount: exact.amount,
+      legacy: true,
+      display: exact.display ?? formatInr(exact.amount, exact.suffix ?? suffix),
+    }
+  }
+
+  if (sorted.length === 1) {
+    const anchor = sorted[0]!
+    const amount = roundThousand((anchor.amount / anchor.days) * days)
+    return { amount, legacy: false, display: formatInr(amount, anchor.suffix ?? suffix) }
+  }
+
+  const first = sorted[0]!
+  const last = sorted[sorted.length - 1]!
+
+  if (days < first.days) {
+    const amount = roundThousand((first.amount / first.days) * days)
+    return { amount, legacy: false, display: formatInr(amount, suffix) }
+  }
+
+  if (days > last.days) {
+    const prev = sorted[sorted.length - 2]!
+    const slope = (last.amount - prev.amount) / Math.max(1, last.days - prev.days)
+    const amount = roundThousand(last.amount + slope * (days - last.days))
+    return { amount, legacy: false, display: formatInr(amount, suffix) }
+  }
+
+  let lower = first
+  let upper = last
+  for (let i = 0; i < sorted.length - 1; i++) {
+    const left = sorted[i]!
+    const right = sorted[i + 1]!
+    if (days >= left.days && days <= right.days) {
+      lower = left
+      upper = right
+      break
+    }
+  }
+
+  const t = (days - lower.days) / Math.max(1, upper.days - lower.days)
+  const amount = roundThousand(lower.amount + t * (upper.amount - lower.amount))
+  return { amount, legacy: false, display: formatInr(amount, suffix) }
+}
+
+function durationRange(anchors: PriceAnchor[]): DurationOption[] {
   const options: DurationOption[] = []
   for (let days = 3; days <= 10; days++) {
     const nights = days - 1
-    const known = byDay.get(days)
-    if (known) {
-      options.push({
-        days,
-        nights,
-        label: `${nights}N / ${days}D`,
-        priceDisplay: known.display,
-        amount: known.amount,
-        legacyAdvertised: true,
-      })
-    } else if (enquireDays.includes(days) || true) {
-      options.push({
-        days,
-        nights,
-        label: `${nights}N / ${days}D`,
-        priceDisplay: 'On request',
-        amount: null,
-        legacyAdvertised: false,
-        note: 'Share your preferred dates for a custom quote.',
-      })
-    }
+    const estimated = estimateAmount(days, anchors)
+    options.push({
+      days,
+      nights,
+      label: `${nights}N / ${days}D`,
+      priceDisplay: estimated.display,
+      amount: estimated.amount,
+      legacyAdvertised: estimated.legacy,
+      note: estimated.legacy
+        ? 'Previously advertised starting price - subject to reconfirmation.'
+        : 'Estimated starting price for planning - subject to reconfirmation.',
+    })
   }
   return options
 }
@@ -75,13 +128,10 @@ export const packages: TravelPackage[] = [
     slug: 'singapore-malaysia',
     title: 'Singapore & Malaysia',
     destinations: ['singapore', 'malaysia'],
-    durations: durationRange(
-      [
-        { days: 6, amount: 85000, display: '₹85,000' },
-        { days: 7, amount: 95000, display: '₹95,000' },
-      ],
-      [],
-    ),
+    durations: durationRange([
+      { days: 6, amount: 85000, display: '₹85,000' },
+      { days: 7, amount: 95000, display: '₹95,000' },
+    ]),
     priceNote: reconfirmationNote,
     shortDescription:
       'Cross-border holidays pairing Singapore waterfront icons with Kuala Lumpur skyline highlights. Choose your duration from the dropdown.',
@@ -99,9 +149,11 @@ export const packages: TravelPackage[] = [
     title: 'Singapore City Highlights',
     destinations: ['singapore'],
     airTicketsSeparate: true,
-    durations: durationRange([{ days: 4, amount: 40000, display: '₹40,000 + air' }], []),
+    durations: durationRange([
+      { days: 4, amount: 40000, display: '₹40,000 + air', suffix: ' + air' },
+    ]),
     priceNote:
-      'Indicative land-style pricing; international air tickets are usually additional unless reconfirmed otherwise. ' +
+      'Estimated land-style pricing; international air tickets are usually additional unless reconfirmed otherwise. ' +
       reconfirmationNote,
     shortDescription:
       'Focused Singapore getaways covering Marina Bay, Gardens by the Bay, and optional Sentosa or Universal Studios time.',
@@ -118,7 +170,7 @@ export const packages: TravelPackage[] = [
     slug: 'malaysia-kl',
     title: 'Malaysia Kuala Lumpur City',
     destinations: ['malaysia'],
-    durations: durationRange([{ days: 4, amount: 38000, display: '₹38,000' }], []),
+    durations: durationRange([{ days: 4, amount: 38000, display: '₹38,000' }]),
     priceNote: reconfirmationNote,
     shortDescription:
       'Kuala Lumpur short breaks with towers, markets, and optional day trips to Batu Caves or Genting Highlands.',
@@ -135,7 +187,7 @@ export const packages: TravelPackage[] = [
     slug: 'bangkok-pattaya',
     title: 'Bangkok & Pattaya',
     destinations: ['thailand'],
-    durations: durationRange([{ days: 5, amount: 38000, display: '₹38,000' }], []),
+    durations: durationRange([{ days: 5, amount: 38000, display: '₹38,000' }]),
     priceNote: reconfirmationNote,
     shortDescription:
       'Combine Bangkok temples and river life with Pattaya coastal resorts. Select 3 to 10 day plans from the duration menu.',

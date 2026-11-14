@@ -73,8 +73,7 @@ export function PackageCard({ pkg, className, index = 0 }: PackageCardProps) {
             >
               {pkg.durations.map((option) => (
                 <option key={option.days} value={option.days}>
-                  {option.label}
-                  {option.amount != null ? ` - from ${option.priceDisplay}` : ' - On request'}
+                  {option.label} - from {option.priceDisplay}
                 </option>
               ))}
             </select>
@@ -83,16 +82,14 @@ export function PackageCard({ pkg, className, index = 0 }: PackageCardProps) {
           <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted">{pkg.shortDescription}</p>
 
           <div className="mt-4 flex flex-wrap items-baseline gap-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-muted">
-              {selected?.amount != null ? 'From' : 'Price'}
-            </span>
+            <span className="text-xs font-medium uppercase tracking-wide text-muted">From</span>
             <span className="font-display text-2xl font-semibold text-coral">
-              {selected?.priceDisplay ?? 'On request'}
+              {selected?.priceDisplay}
             </span>
           </div>
 
-          <p className="mt-2 inline-flex w-fit rounded-full bg-sand px-3 py-1 text-xs font-medium text-muted ring-1 ring-navy/10">
-            Rates subject to reconfirmation
+          <p className="mt-2 inline-flex w-fit rounded-full bg-sunset/15 px-3 py-1 text-xs font-semibold text-navy ring-1 ring-sunset/30">
+            Prices are estimated
           </p>
 
           <div className="mt-auto flex flex-wrap gap-2 pt-5">
