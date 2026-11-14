@@ -4,6 +4,20 @@ import { useTheme } from '@/context/ThemeContext';
 import { absoluteUrl, SITE_URL } from '@/utils/seo';
 
 const DEFAULT_OG = '/logos/logo-horizontal.svg';
+const TAB_BRAND = 'Vihaara Yatra';
+
+function buildTabTitle(title: string): string {
+  const cleaned = title
+    .replace(/\s*\|\s*Vihaara\s*Yatra(?:\s*International\s*Tours)?/gi, '')
+    .replace(/\s*\|\s*VihaaraYatra(?:\s*International\s*Tours)?/gi, '')
+    .replace(/^Vihaara\s*Yatra(?:\s*International\s*Tours)?\s*[|:-]?\s*/i, '')
+    .replace(/^VihaaraYatra(?:\s*International\s*Tours)?\s*[|:-]?\s*/i, '')
+    .trim();
+
+  if (!cleaned) return TAB_BRAND;
+  if (cleaned.toLowerCase() === TAB_BRAND.toLowerCase()) return TAB_BRAND;
+  return `${cleaned} | ${TAB_BRAND}`;
+}
 
 export interface SEOProps {
   title: string;
@@ -26,7 +40,7 @@ export function SEO({
 }: SEOProps) {
   const { theme } = useTheme();
   const canonical = absoluteUrl(path);
-  const fullTitle = title.includes(siteInfo.name) ? title : `${title} | ${siteInfo.name}`;
+  const fullTitle = buildTabTitle(title);
   const ogImage = absoluteUrl(image ?? DEFAULT_OG);
   const robots = noindex ? 'noindex, nofollow' : 'index, follow';
   const themeColor = theme === 'dark' ? '#0F1612' : '#1B3A2F';
@@ -60,8 +74,8 @@ export function SEO({
       <meta name="twitter:image" content={ogImage} />
 
       <link rel="alternate" hrefLang="en" href={canonical} />
-      <meta property="og:image:alt" content={`${siteInfo.name} - ${title}`} />
-      <meta name="application-name" content={siteInfo.name} />
+      <meta property="og:image:alt" content={`${TAB_BRAND} - ${title}`} />
+      <meta name="application-name" content={TAB_BRAND} />
       <link rel="home" href={SITE_URL} />
 
       {ldPayload?.map((node, index) => (
