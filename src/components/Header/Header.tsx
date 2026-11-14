@@ -5,7 +5,6 @@ import { mainNavigation } from '@/data/navigation'
 import { siteInfo } from '@/data/site'
 import { useTheme } from '@/context/ThemeContext'
 import { buildWhatsAppUrl } from '@/utils/whatsapp'
-import { Button } from '@/components/UI/Button'
 import { Container } from '@/components/UI/Container'
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle'
 import { cn } from '@/lib/cn'
@@ -55,13 +54,13 @@ export function Header({ overHero: _overHero = false }: HeaderProps) {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
-      'whitespace-nowrap rounded-lg px-2 py-1 text-sm font-medium transition-colors lg:px-2.5',
-      isActive ? 'text-sunset' : 'text-navy hover:text-teal',
+      'whitespace-nowrap rounded-lg px-2 py-1 text-sm font-semibold transition-colors lg:px-2.5',
+      isActive ? 'text-teal' : 'text-navy hover:text-teal',
     )
 
   return (
     <header className="fixed inset-x-0 top-0 z-40">
-      <div className="hidden border-b border-white/10 bg-linear-to-r from-navy-deep via-[#1B3A2F] to-teal text-[#FBF7F0] sm:block">
+      <div className="hidden border-b border-white/10 bg-[#1B3A2F] text-[#FBF7F0] sm:block">
         <Container className="flex items-center justify-between gap-4 py-2 text-xs sm:text-sm">
           <p>Your next international adventure starts here.</p>
           <a
@@ -78,7 +77,7 @@ export function Header({ overHero: _overHero = false }: HeaderProps) {
 
       <nav
         aria-label="Main"
-        className="border-b border-navy/10 bg-surface text-navy shadow-sm"
+        className="border-b border-navy/10 bg-sand text-navy shadow-sm dark:bg-surface"
       >
         <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
           <Link to="/" className="flex shrink-0 items-center rounded-lg focus-visible:ring-2">
@@ -104,9 +103,12 @@ export function Header({ overHero: _overHero = false }: HeaderProps) {
           <div className="flex items-center gap-2">
             <ThemeToggle solid />
             <div className="hidden items-center gap-2 sm:flex">
-              <Button variant="primary" size="sm" to="/contact">
+              <Link
+                to="/contact"
+                className="rounded-lg px-3 py-2 text-sm font-bold text-navy transition-colors hover:text-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunset"
+              >
                 Plan Your Trip
-              </Button>
+              </Link>
             </div>
 
             <button
@@ -134,8 +136,8 @@ export function Header({ overHero: _overHero = false }: HeaderProps) {
                 to={item.path}
                 className={({ isActive }) =>
                   cn(
-                    'rounded-xl px-3 py-2.5 text-base font-medium',
-                    isActive ? 'bg-sand text-sunset' : 'text-navy hover:bg-sand',
+                    'rounded-xl px-3 py-2.5 text-base font-semibold',
+                    isActive ? 'bg-sand text-teal' : 'text-navy hover:bg-sand',
                   )
                 }
                 end={item.path === '/'}
@@ -148,9 +150,13 @@ export function Header({ overHero: _overHero = false }: HeaderProps) {
               <span className="text-sm text-muted">Theme</span>
               <ThemeToggle solid />
             </div>
-            <Button variant="primary" size="md" to="/contact" className="mt-3 w-full">
+            <Link
+              to="/contact"
+              className="mt-3 block rounded-xl px-3 py-2.5 text-center text-base font-bold text-navy hover:bg-sand"
+              onClick={() => setMenuOpen(false)}
+            >
               Plan Your Trip
-            </Button>
+            </Link>
           </div>
         </div>
       ) : null}
