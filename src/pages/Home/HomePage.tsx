@@ -12,6 +12,7 @@ import { SEO } from '@/components/SEO/SEO'
 import { DestinationCard } from '@/components/DestinationCard/DestinationCard'
 import { PackageCard } from '@/components/PackageCard/PackageCard'
 import { GalleryMarquee } from '@/components/Gallery/GalleryMarquee'
+import { HeroBannerSlider } from '@/components/Hero/HeroBannerSlider'
 import { Button } from '@/components/UI/Button'
 import { Container } from '@/components/UI/Container'
 import { SectionHeading } from '@/components/UI/SectionHeading'
@@ -22,8 +23,8 @@ import { siteInfo } from '@/data/site'
 import { buildGraph, organizationJsonLd, websiteJsonLd } from '@/utils/seo'
 import { buildWhatsAppUrl, destinationWhatsAppMessage } from '@/utils/whatsapp'
 
-const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80'
+const HERO_OG_IMAGE = destinations[0]?.heroImage
+  ?? 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=2400&q=80'
 
 const trustItems = [
   { icon: Building2, label: `Established ${siteInfo.established}` },
@@ -50,26 +51,18 @@ export function HomePage() {
         title="Vihaara Yatra International Tours | Singapore, Malaysia & Thailand Holidays"
         description="Explore international holiday packages to Singapore, Malaysia, Thailand and other destinations with Vihaara Yatra International Tours. Plan your next journey with our travel team."
         path="/"
-        image={HERO_IMAGE}
+        image={HERO_OG_IMAGE}
         jsonLd={buildGraph([organizationJsonLd(), websiteJsonLd()])}
       />
 
       <section className="relative flex min-h-svh flex-col justify-end overflow-hidden bg-navy-deep">
-        <img
-          src={HERO_IMAGE}
-          alt="Tropical coastline at sunrise for international holidays"
-          className="absolute inset-0 size-full object-cover"
-          width={2400}
-          height={1600}
-          fetchPriority="high"
-          decoding="async"
-        />
+        <HeroBannerSlider />
         <div
-          className="absolute inset-0 bg-linear-to-t from-navy-deep via-[#1B3A2F]/70 to-[#FF8A00]/25"
+          className="absolute inset-0 z-10 bg-linear-to-t from-navy-deep via-[#1B3A2F]/70 to-[#FF8A00]/25"
           aria-hidden
         />
 
-        <Container className="relative z-10 pb-16 pt-28 sm:pb-20 sm:pt-36">
+        <Container className="relative z-20 pb-24 pt-28 sm:pb-28 sm:pt-36">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
