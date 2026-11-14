@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, MessageCircle, X } from 'lucide-react'
 import { mainNavigation } from '@/data/navigation'
 import { siteInfo } from '@/data/site'
-import { useScrollSolid } from '@/hooks/useScrollSolid'
 import { useTheme } from '@/context/ThemeContext'
 import { buildWhatsAppUrl } from '@/utils/whatsapp'
 import { Button } from '@/components/UI/Button'
@@ -15,9 +14,7 @@ interface HeaderProps {
   overHero?: boolean
 }
 
-export function Header({ overHero = false }: HeaderProps) {
-  const scrolled = useScrollSolid(56)
-  const solid = scrolled || !overHero
+export function Header({ overHero: _overHero = false }: HeaderProps) {
   const { theme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
   const menuId = useId()
@@ -26,7 +23,8 @@ export function Header({ overHero = false }: HeaderProps) {
   const firstLinkRef = useRef<HTMLAnchorElement>(null)
 
   const waHref = buildWhatsAppUrl()
-  const useDarkLogo = !solid || theme === 'dark'
+  const logoSrc =
+    theme === 'dark' ? '/logos/logo-horizontal-dark.svg' : '/logos/logo-horizontal.svg'
 
   useEffect(() => {
     setMenuOpen(false)
@@ -58,13 +56,7 @@ export function Header({ overHero = false }: HeaderProps) {
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
       'whitespace-nowrap rounded-lg px-2 py-1 text-sm font-medium transition-colors lg:px-2.5',
-      solid
-        ? isActive
-          ? 'text-sunset'
-          : 'text-navy hover:text-teal'
-        : isActive
-          ? 'text-sunset'
-          : 'text-white/90 hover:text-white',
+      isActive ? 'text-sunset' : 'text-navy hover:text-teal',
     )
 
   return (
@@ -86,17 +78,12 @@ export function Header({ overHero = false }: HeaderProps) {
 
       <nav
         aria-label="Main"
-        className={cn(
-          'border-b transition-colors duration-300',
-          solid
-            ? 'border-navy/10 bg-surface/95 text-navy shadow-sm backdrop-blur-md'
-            : 'border-transparent bg-transparent text-white',
-        )}
+        className="border-b border-navy/10 bg-surface text-navy shadow-sm"
       >
         <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
           <Link to="/" className="flex shrink-0 items-center rounded-lg focus-visible:ring-2">
             <img
-              src={useDarkLogo ? '/logos/logo-horizontal-dark.svg' : '/logos/logo-horizontal.svg'}
+              src={logoSrc}
               alt={siteInfo.name}
               className="h-9 w-auto sm:h-10"
               width={180}
@@ -115,14 +102,9 @@ export function Header({ overHero = false }: HeaderProps) {
           </ul>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle solid={solid} />
+            <ThemeToggle solid />
             <div className="hidden items-center gap-2 sm:flex">
-              <Button
-                variant={solid ? 'primary' : 'secondary'}
-                size="sm"
-                to="/contact"
-                className={cn(!solid && 'border-white text-white hover:bg-white hover:text-navy-deep')}
-              >
+              <Button variant="primary" size="sm" to="/contact">
                 Plan Your Trip
               </Button>
             </div>
@@ -130,10 +112,7 @@ export function Header({ overHero = false }: HeaderProps) {
             <button
               ref={menuButtonRef}
               type="button"
-              className={cn(
-                'inline-flex items-center justify-center rounded-xl p-2 xl:hidden',
-                solid ? 'text-navy hover:bg-navy/5' : 'text-white hover:bg-white/10',
-              )}
+              className="inline-flex items-center justify-center rounded-xl p-2 text-navy hover:bg-navy/5 xl:hidden"
               aria-expanded={menuOpen}
               aria-controls={menuId}
               onClick={() => setMenuOpen((open) => !open)}
@@ -170,7 +149,7 @@ export function Header({ overHero = false }: HeaderProps) {
               <ThemeToggle solid />
             </div>
             <Button variant="primary" size="md" to="/contact" className="mt-3 w-full">
-              Plan your trip
+              Plan Your Trip
             </Button>
           </div>
         </div>
