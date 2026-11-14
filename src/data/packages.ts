@@ -148,13 +148,8 @@ export const packages: TravelPackage[] = [
     slug: 'singapore-city',
     title: 'Singapore City Highlights',
     destinations: ['singapore'],
-    airTicketsSeparate: true,
-    durations: durationRange([
-      { days: 4, amount: 40000, display: '₹40,000 + air', suffix: ' + air' },
-    ]),
-    priceNote:
-      'Estimated land-style pricing; international air tickets are usually additional unless reconfirmed otherwise. ' +
-      reconfirmationNote,
+    durations: durationRange([{ days: 4, amount: 40000, display: '₹40,000' }]),
+    priceNote: reconfirmationNote,
     shortDescription:
       'Focused Singapore getaways covering Marina Bay, Gardens by the Bay, and optional Sentosa or Universal Studios time.',
     highlights: [
